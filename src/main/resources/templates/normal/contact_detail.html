@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Home page</title>
+</head>
+<body>
+	<section>
+		<div class="card mr-3 ml-3" th:if= ${contact}>
+			<div class="car-body">
+				<div class="container text-center">
+				
+						<img class ="my_profile_picture" style ="width:200px ; height: 200px ; " src="" th:src="@{'/image/'+${contact.getImage()}}" alt="" />
+						<h3 class="mt-3"><span th:text="${contact.name}"></span> (<span th:text="${contact.secondName}"></span>)</h3>
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th scope="col">#ID</th>
+						      <th scope="col"><span th:text="'SCM2023'+${contact.cId}"></span></th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th scope="row">Email</th>
+						      <td><span th:text="${contact.email}"></span></td> 
+						    </tr>
+						    <tr>
+						      <th scope="row">Phone</th>
+						      <td><span th:text="${contact.phone}"></span></td> 
+						    </tr>
+						    <tr>
+						      <th scope="row">Work</th>
+						      <td><span th:text="${contact.work}"></span></td> 
+						    </tr>
+						  </tbody>
+						</table>
+						
+						<div class="description mt-3">
+						
+							<th:block th:utext="${contact.description}"></th:block>
+							
+						</div>
+						
+						<div class="container mt-2">
+						
+							<button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-block btn-sm btn-danger ">Delete</button>
+							
+							<form class="mt-2" th:action ="@{'/user/update-contact/'+${contact.cId}}" method="post">
+							      	
+							      	<button type="submit" class="btn btn-block btn-primary btn-sm">Update</button>
+						      	
+						    </form>
+						
+						</div>
+			     </div>
+			</div>
+		</div>
+		<h1 class="text-center p-1 bg-danger text-white  " th:unless= ${contact}>You don't have permission to see this page..</h1>
+	</section>
+
+</body>
+</html>
+
+
